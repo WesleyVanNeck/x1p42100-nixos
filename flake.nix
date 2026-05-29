@@ -1,7 +1,7 @@
 {
   description = "Minimal NixOS installation media";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-stable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # hyprland.url = "github:hyprwm/Hyprland";
 
     # nixos-muvm-fex = {
