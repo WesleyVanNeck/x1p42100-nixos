@@ -21,7 +21,7 @@ name: Build NixOS ISO
 on:
   # Lightweight system closure builds on every push
   push:
-    branches: ["dev"]
+    branches: ["patch-2"]
   # Full ISO build only when manually triggered (saves runner minutes)
   workflow_dispatch:
 
