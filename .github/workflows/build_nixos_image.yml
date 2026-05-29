@@ -41,7 +41,7 @@ jobs:
 
     steps:
       - name: cleanup
-        run: rm -rf ${{ github.workspace }}/*
+        run: sudo rm -rf ${{ github.workspace }}/*
         
       - name: Check out repository
         uses: actions/checkout@v4
