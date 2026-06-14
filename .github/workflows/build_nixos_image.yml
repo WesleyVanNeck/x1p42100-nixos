@@ -41,8 +41,15 @@ jobs:
     timeout-minutes: 360
 
     steps:
+      # ------------------------------------------------------------------
+      # cleanup old Nix Installation
+      # ------------------------------------------------------------------
+      - name: cleanup
+        run: sudo rm -rf ${{ github.workspace }}/*
+        
       - name: Check out repository
         uses: actions/checkout@v4
+        
 
       # ------------------------------------------------------------------
       # Nix Installation
