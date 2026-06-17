@@ -50,8 +50,8 @@
         specialArgs = {inherit inputs;};
         system = "aarch64-linux";
         modules = [
-          "${nixpkgs-patched}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
-          #"${nixpkgs-patched}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          '#"${nixpkgs-patched}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
+          "${nixpkgs-patched}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ./iso.nix
           ./modules/x1p42100.nix
           {
