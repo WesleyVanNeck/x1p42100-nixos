@@ -26,6 +26,7 @@
 in {
   imports = [
     ./hardware.nix
+    ./firmware.nix
     ./ccache.nix
   ];
   nixpkgs.config.allowUnfree = true;
@@ -371,7 +372,7 @@ in {
 
   services.openssh.enable = true;
 
-  boot.plymouth.enable = true;
+  # boot.plymouth.enable = true;
 
   services.xserver = {
     enable = true;
@@ -467,42 +468,34 @@ in {
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/48870f93-19d4-499b-baf4-9a740791cdb2";
+      device = "/dev/disk/by-label/root-arm64";
       fsType = "btrfs";
       options = [
         "subvol=rootfs"
-        #"compress=zstd"
-        "noatime"
-      ];
-      neededForBoot = true;
-    };
-    "/nix" = {
-      device = "/dev/disk/by-uuid/48870f93-19d4-499b-baf4-9a740791cdb2";
-      fsType = "btrfs";
-      options = [
-        "subvol=nix"
         "compress=zstd"
         "noatime"
       ];
       neededForBoot = true;
     };
+
     "/boot" = {
-      device = "/dev/disk/by-label/ESP";
+      device = "/dev/disk/by-label/BOOT";
       fsType = "vfat";
       options = [
         "fmask=0177"
         "dmask=0077"
       ];
     };
-    "/mnt/cache" = {
-      device = "192.168.1.102:/volume1/cache";
-      fsType = "nfs";
-      options = [
-        "x-systemd.automount"
-        "noauto"
-        "x-systemd.idle-timeout=600"
-      ];
-    };
+
+    # "/mnt/cache" = {
+    #   device = "192.168.1.102:/volume1/cache";
+    #   fsType = "nfs";
+    #   options = [
+    #     "x-systemd.automount"
+    #     "noauto"
+    #     "x-systemd.idle-timeout=600"
+    #   ];
+    # };
   };
 
   swapDevices = [
@@ -512,9 +505,10 @@ in {
       options = ["discard"];
     }
   ];
+
   boot.resumeDevice = "/dev/disk/by-partlabel/disk-swap";
   # boot.kernelPackages = pkgs.callPackage ./packages/x1e42100-linux.nix { withCcache = true; };
-  boot.kernelPackages = lib.mkForce (pkgs.callPackage ./packages/x1e42100-linux.nix { withCcache = true; });
+  boot.kernelPackages = lib.mkForce (pkgs.callPackage ./packages/x1e42100-linux.nix { withCcache = false; });
   zramSwap.enable = true;
 
   system.stateVersion = "26.05";
